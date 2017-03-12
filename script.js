@@ -1,9 +1,13 @@
 function setupEventListeners() {
    var searchButton = document.getElementById('search-button'); 
    searchButton.addEventListener('click', submitSearch); 
+   var searchResultsDiv = document.getElementById('search-results-section');
+   searchResultsDiv.addEventListener('click', function(event){openResultLink(event);});
 }
 
 setupEventListeners();
+
+
 
 function submitSearch() {
     var searchString = document.getElementById('search-string').value;
@@ -14,14 +18,11 @@ function submitSearch() {
 }
 
 function renderResults(results) {
-    console.log('RESULTS START HERE', JSON.stringify(results));
-    // console.log(results.query.search[0].title, results.query.search[1].title);
     resultsArray = results.query.search;
     var resultsDiv = document.getElementById('search-results-section');
     var individualResultDiv = document.createElement('div');
     individualResultDiv.classList.add("individual-result");
     resultsArray.forEach(function(item) {
-        console.log(item.title, item.snippet);
         thisResultDiv = individualResultDiv;
         var title = document.createElement('h3');
         title.innerHTML = item.title;
@@ -33,3 +34,7 @@ function renderResults(results) {
     });
 }
 
+function openResultLink(event) {
+    console.log('click!', event.target);
+};
+ // window.location = 'https://en.wikipedia.org/wiki/' + item.title;
