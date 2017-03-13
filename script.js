@@ -25,6 +25,7 @@ function renderResults(results) {
         title.innerHTML = item.title;
         var snippet = document.createElement('p');
         snippet.innerHTML = item.snippet.replace(/<[^>]*>/g, '');
+        snippet.innerHTML += "... (click to read article)";
         individualResultDiv.appendChild(title);
         individualResultDiv.appendChild(snippet);
         resultsDiv.appendChild(individualResultDiv);
@@ -32,8 +33,12 @@ function renderResults(results) {
 }
 
 function openResultLink(event) {
-    console.log('click!', event.target);
-    var c = event.target;
-    console.log(c.tagName);
+    var t = event.target;
+    var articleName = "";
+    if (t.tagName !== "DIV") {
+        articleName = t.parentNode.firstChild.innerHTML;
+    } else {
+        articleName = t.firstChild.innerHTML;
+    }
+    window.open('https://en.wikipedia.org/wiki/' + articleName);
 };
- // window.location = 'https://en.wikipedia.org/wiki/' + item.title;
