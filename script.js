@@ -24,7 +24,7 @@ function renderResults(results) {
         var title = document.createElement('h3');
         title.innerHTML = item.title;
         var snippet = document.createElement('p');
-        snippet.innerHTML = item.snippet;
+        snippet.innerHTML = item.snippet.replace(/<[^>]*>/g, '');
         individualResultDiv.appendChild(title);
         individualResultDiv.appendChild(snippet);
         resultsDiv.appendChild(individualResultDiv);
@@ -33,5 +33,7 @@ function renderResults(results) {
 
 function openResultLink(event) {
     console.log('click!', event.target);
+    var c = event.target;
+    console.log(c.tagName);
 };
  // window.location = 'https://en.wikipedia.org/wiki/' + item.title;
