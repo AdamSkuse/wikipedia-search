@@ -1,0 +1,22 @@
+body {
+    margin: 0 100px;
+}
+
+.header,
+.search-box {
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    line-height: 200%;
+}
+
+.search-results {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.individual-result {
+    background-color: #f99;
+    margin: 10px, auto;
+}
+

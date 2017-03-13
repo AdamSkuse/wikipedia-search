@@ -7,8 +7,6 @@ function setupEventListeners() {
 
 setupEventListeners();
 
-
-
 function submitSearch() {
     var searchString = document.getElementById('search-string').value;
     console.log(searchString);
@@ -19,18 +17,17 @@ function submitSearch() {
 
 function renderResults(results) {
     resultsArray = results.query.search;
-    var resultsDiv = document.getElementById('search-results-section');
-    var individualResultDiv = document.createElement('div');
-    individualResultDiv.classList.add("individual-result");
     resultsArray.forEach(function(item) {
-        thisResultDiv = individualResultDiv;
+        var resultsDiv = document.getElementById('search-results-section');
+        var individualResultDiv = document.createElement('div');
+        individualResultDiv.classList.add("individual-result");
         var title = document.createElement('h3');
         title.innerHTML = item.title;
         var snippet = document.createElement('p');
         snippet.innerHTML = item.snippet;
-        thisResultDiv.appendChild(title);
-        thisResultDiv.appendChild(snippet);
-        resultsDiv.appendChild(thisResultDiv);
+        individualResultDiv.appendChild(title);
+        individualResultDiv.appendChild(snippet);
+        resultsDiv.appendChild(individualResultDiv);
     });
 }
 
