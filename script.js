@@ -1,6 +1,12 @@
 function setupEventListeners() {
    var searchButton = document.getElementById('search-button'); 
    searchButton.addEventListener('click', submitSearch); 
+   var searchInput = document.getElementById('search-string');
+   searchInput.addEventListener('keyup', function(event) {
+       if (event.which === 13) {
+            submitSearch();
+       }
+   });
    var searchResultsDiv = document.getElementById('search-results-section');
    searchResultsDiv.addEventListener('click', function(event){openResultLink(event);});
 }
@@ -17,19 +23,29 @@ function submitSearch() {
 
 function renderResults(results) {
     resultsArray = results.query.search;
-    resultsArray.forEach(function(item) {
-        var resultsDiv = document.getElementById('search-results-section');
-        var individualResultDiv = document.createElement('div');
-        individualResultDiv.classList.add("individual-result");
-        var title = document.createElement('h3');
-        title.innerHTML = item.title;
-        var snippet = document.createElement('p');
-        snippet.innerHTML = item.snippet.replace(/<[^>]*>/g, '');
-        snippet.innerHTML += "... (click to read article)";
-        individualResultDiv.appendChild(title);
-        individualResultDiv.appendChild(snippet);
-        resultsDiv.appendChild(individualResultDiv);
-    });
+    console.log(resultsArray);
+    var resultsDiv = document.getElementById('search-results-section');
+    if (resultsArray.length < 1) {
+        resultsDiv.innerHTML = "";
+        console.log("No results!")
+        var message = document.createElement('p');
+        message.innerHTML = "No results!";
+        resultsDiv.appendChild(message);
+    } else {
+            resultsDiv.innerHTML = "";
+            resultsArray.forEach(function(item) {
+            var individualResultDiv = document.createElement('div');
+            individualResultDiv.classList.add("individual-result");
+            var title = document.createElement('h3');
+            title.innerHTML = item.title;
+            var snippet = document.createElement('p');
+            snippet.innerHTML = item.snippet.replace(/<[^>]*>/g, '');
+            snippet.innerHTML += "... (click to read article)";
+            individualResultDiv.appendChild(title);
+            individualResultDiv.appendChild(snippet);
+            resultsDiv.appendChild(individualResultDiv);
+        });
+    }      
 }
 
 function openResultLink(event) {
